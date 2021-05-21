@@ -22,6 +22,8 @@ import java.util.List;
 
 public class UserRecycler extends RecyclerView.Adapter<UserRecycler.UserViewHolder> {
     List<User> data;
+    User user = new User();
+
 
     public UserRecycler(List<User> users) {
         data = users;
@@ -55,7 +57,7 @@ public class UserRecycler extends RecyclerView.Adapter<UserRecycler.UserViewHold
         notifyDataSetChanged();
     }
 
-    public class UserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class UserViewHolder extends RecyclerView.ViewHolder{
 
         ImageView imageView;
         TextView name, dob;
@@ -67,14 +69,7 @@ public class UserRecycler extends RecyclerView.Adapter<UserRecycler.UserViewHold
             name = itemView.findViewById(R.id.cardName);
             dob = itemView.findViewById(R.id.cardDob);
             imageView = itemView.findViewById(R.id.cardImage);
-            btnDelete = itemView.findViewById(R.id.btnDelete);
-            btnDelete.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View v) {
-            data.clear();
-            notifyDataSetChanged();
-        }
     }
 }

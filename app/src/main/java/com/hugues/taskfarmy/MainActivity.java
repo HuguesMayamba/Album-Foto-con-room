@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -27,6 +28,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -80,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     public void saveUser(View view) {
 
         if(name.getText().toString().isEmpty() || uName.getText().toString().isEmpty()
@@ -102,15 +103,23 @@ public class MainActivity extends AppCompatActivity {
 
             //Save particular user
             userDAO.insertUser(user);
-            Toast.makeText(this, "Insertion successful", Toast.LENGTH_LONG).show();
+
+            Toast.makeText(this, "Insertion successful", Toast.LENGTH_SHORT).show();
+
         }
 
     }
 
     public void showUsers(View view) {
+
         Intent intent = new Intent(this, ShowUsersActivity.class);
         startActivity(intent);
 
     }
 
+    public void deleteUsers(View view) {
+
+        userDAO.delete(userDAO.getAllUsers());
+
+    }
 }

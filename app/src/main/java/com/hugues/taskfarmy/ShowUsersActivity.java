@@ -32,7 +32,6 @@ public class ShowUsersActivity extends AppCompatActivity {
         UserRecycler userRecycler = new UserRecycler(userDAO.getAllUsers());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(userRecycler);
-
     }
 
 }
