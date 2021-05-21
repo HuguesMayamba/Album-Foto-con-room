@@ -1,0 +1,2 @@
+rootProject.name = "TaskFarmy"
+include ':app'
