@@ -1,34 +1,25 @@
 package com.hugues.taskfarmy;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.hugues.taskfarmy.DataModel.DataConverter;
 import com.hugues.taskfarmy.DataModel.User;
 import com.hugues.taskfarmy.DataModel.UserDAO;
 import com.hugues.taskfarmy.DataModel.UserDatabase;
 
-import java.io.File;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,8 +46,25 @@ public class MainActivity extends AppCompatActivity {
         userDAO = UserDatabase.getDBInstence(this).userDAO();
     }
 
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable("bitmap", bmpImage);
+        super.onSaveInstanceState(outState);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        bmpImage = outState.getParcelable("bitmap");
+        imageView.setImageBitmap(bmpImage);
+
+    }
+
     final  int CAMERA_INTENT = 51;
 
+    @SuppressLint("QueryPermissionsNeeded")
     public void takePicture(View view) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if(intent.resolveActivity(getPackageManager()) != null){
@@ -69,16 +77,14 @@ public class MainActivity extends AppCompatActivity {
     protected  void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        switch (requestCode){
-            case CAMERA_INTENT:
-
-                    bmpImage = (Bitmap) data.getExtras().get("data");
-                    if (bmpImage != null){
-                        imageView.setImageBitmap(bmpImage);
-                    }else{
-                        Toast.makeText(this, "Bipmap is Null", Toast.LENGTH_SHORT).show();
-                    }
-                break;
+        if (requestCode == CAMERA_INTENT) {
+            assert data != null;
+            bmpImage = (Bitmap) data.getExtras().get("data");
+            if (bmpImage != null) {
+                imageView.setImageBitmap(bmpImage);
+            } else {
+                Toast.makeText(this, "Bipmap is Null", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

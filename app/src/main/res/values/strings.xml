@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">TaskFarmy</string>
+    <string name="save">Save</string>
+    <string name="show">Show</string>
+    <string name="delete">Delete</string>
+    <string name="give_full_name">Give Full Name</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="mm_dd_yyyy">mm/dd/yyyy</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="name">Name</string>
+    <string name="dob">DOB</string>
 </resources>
