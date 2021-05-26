@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -42,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         uName = findViewById(R.id.userName);
         pas = findViewById(R.id.userPassword);
         dob = findViewById(R.id.userDob);
-
         userDAO = UserDatabase.getDBInstence(this).userDAO();
+
     }
 
 
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 
     public void saveUser(View view) {
 
