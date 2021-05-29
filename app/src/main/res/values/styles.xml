@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -42,8 +42,8 @@
 
     <!-- Text Fields -->
     <style name="MyTheme.DayNight.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <item name="android:layout_marginStart">@dimen/item_padding_horizontal</item>
-        <item name="android:layout_marginEnd">@dimen/item_padding_horizontal</item>
+        <item name="android:layout_marginStart" tools:targetApi="jelly_bean_mr1">@dimen/item_padding_horizontal</item>
+        <item name="android:layout_marginEnd" tools:targetApi="jelly_bean_mr1">@dimen/item_padding_horizontal</item>
         <item name="android:layout_marginTop">@dimen/item_padding_vertical</item>
     </style>
 </resources>

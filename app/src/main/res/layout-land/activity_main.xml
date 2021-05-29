@@ -21,7 +21,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/userImage"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="220dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
             app:layout_constraintTop_toBottomOf="@+id/userImage"
             android:hint="@string/give_full_name"
             app:startIconDrawable="@drawable/ic_person"
-            app:helperText="Required*"
+            app:helperText="Requerido*"
             app:helperTextTextColor="@color/color_error"
             app:counterEnabled="true"
             app:counterMaxLength="30"
@@ -64,7 +64,7 @@
             app:layout_constraintTop_toBottomOf="@+id/TxtILFullName"
             android:hint="@string/user_name"
             app:startIconDrawable="@drawable/ic_person"
-            app:helperText="Required*"
+            app:helperText="Requerido*"
             app:helperTextTextColor="@color/color_error"
             app:counterEnabled="true"
             app:counterMaxLength="30"
@@ -89,7 +89,7 @@
             app:layout_constraintTop_toBottomOf="@+id/TxtILUserName"
             android:hint="@string/password"
             app:startIconDrawable="@drawable/ic_lock"
-            app:helperText="Required*"
+            app:helperText="Requerido*"
             app:helperTextTextColor="@color/color_error"
             app:counterEnabled="true"
             app:counterMaxLength="30"
@@ -105,7 +105,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/TxtILDob"
+            android:id="@+id/TxtILDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,28 +113,27 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             app:layout_constraintTop_toBottomOf="@+id/TxtILPassword"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             android:hint="@string/dob"
             app:startIconDrawable="@drawable/ic_calendar"
-            app:helperText="Required*"
+            app:helperText="Requerido*"
             app:helperTextTextColor="@color/color_error"
             app:counterEnabled="true"
             app:counterMaxLength="30"
-            app:endIconMode="clear_text"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userDob"
+                android:id="@+id/userDod"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLength="31"
-                android:inputType="date"/>
+                />
         </com.google.android.material.textfield.TextInputLayout>
+
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/TxtILDob"
+            app:layout_constraintTop_toBottomOf="@+id/TxtILDate"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

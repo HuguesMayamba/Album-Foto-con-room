@@ -1,12 +1,16 @@
 package com.hugues.taskfarmy;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -21,12 +25,14 @@ import com.hugues.taskfarmy.DataModel.UserDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
     ImageView imageView;
     Bitmap bmpImage;
-    EditText name,uName, pas, dob;
+    EditText name, uName, pas, dod;
+    private int mDate, mMonth, mYear;
 
     UserDAO userDAO;
     User user = new User();
@@ -42,8 +48,31 @@ public class MainActivity extends AppCompatActivity {
         name = findViewById(R.id.fullName);
         uName = findViewById(R.id.userName);
         pas = findViewById(R.id.userPassword);
-        dob = findViewById(R.id.userDob);
+        dod = findViewById(R.id.userDod);
         userDAO = UserDatabase.getDBInstence(this).userDAO();
+
+        dod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cal = Calendar.getInstance();
+                mDate = cal.get(Calendar.DATE);
+                mMonth = cal.get(Calendar.MONTH);
+                mYear = cal.get(Calendar.YEAR);
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        MainActivity.this, android.R.style.Widget_Material,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                dod.setText(dayOfMonth+"/"+month+"/"+year);
+                            }
+                        },mYear, mMonth, mDate);
+                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()-1000);
+                datePickerDialog.show();
+            }
+        });
+
+
+        Log.d("TAG1", "DATEDIALOG" );
 
     }
 
@@ -93,7 +122,8 @@ public class MainActivity extends AppCompatActivity {
     public void saveUser(View view) {
 
         if(name.getText().toString().isEmpty() || uName.getText().toString().isEmpty()
-        || pas.getText().toString().isEmpty() || dob.getText().toString().isEmpty() || bmpImage == null){
+        || pas.getText().toString().isEmpty() || bmpImage == null){
+
 
             Toast.makeText(this,"User data is missing", Toast.LENGTH_LONG).show();
 
@@ -104,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             user.setPassword(pas.getText().toString());
             user.setImage(DataConverter.convertImage2ByteArray(bmpImage));
             try {
-                user.setDob(new SimpleDateFormat("dd/MM/yyyy").parse(dob.getText().toString()));
+                user.setDob(new SimpleDateFormat("dd/MM/yyyy").parse(dod.getText().toString()));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -130,4 +160,5 @@ public class MainActivity extends AppCompatActivity {
         userDAO.delete(userDAO.getAllUsers());
 
     }
+
 }

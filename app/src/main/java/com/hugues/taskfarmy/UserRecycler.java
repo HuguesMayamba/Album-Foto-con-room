@@ -4,25 +4,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.hugues.taskfarmy.DataModel.DataConverter;
 import com.hugues.taskfarmy.DataModel.User;
-import com.hugues.taskfarmy.DataModel.UserDAO;
-import com.hugues.taskfarmy.DataModel.UserDatabase;
-
 import org.jetbrains.annotations.NotNull;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class UserRecycler extends RecyclerView.Adapter<UserRecycler.UserViewHolder> {
     List<User> data;
-    User user = new User();
 
 
     public UserRecycler(List<User> users) {
@@ -30,7 +24,7 @@ public class UserRecycler extends RecyclerView.Adapter<UserRecycler.UserViewHold
     }
 
     @Override
-    public UserViewHolder onCreateViewHolder(@NotNull ViewGroup viewGroup, int i) {
+    public @NotNull UserViewHolder onCreateViewHolder(@NotNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(
                 R.layout.user_item_layout,
                 viewGroup, false
@@ -42,7 +36,21 @@ public class UserRecycler extends RecyclerView.Adapter<UserRecycler.UserViewHold
         User user = data.get(i);
         userViewHolder.imageView.setImageBitmap(DataConverter.converByteArray2Image(user.getImage()));
         userViewHolder.name.setText(user.getFullName());
-        userViewHolder.dob.setText(String.valueOf(user.getDob()));
+
+        SimpleDateFormat formatoOriginal = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+        SimpleDateFormat formatoDeseado = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+
+        String fechaFormateadaMin = "";
+
+        try{
+           Date fechaMin = formatoOriginal.parse(String.valueOf(user.getDob()));
+            assert fechaMin != null;
+            fechaFormateadaMin = formatoDeseado.format(fechaMin);
+            Log.d ("TAG", "DATE"+ fechaFormateadaMin);
+
+        }catch (Exception e){ e.printStackTrace(); }
+
+        userViewHolder.dob.setText(fechaFormateadaMin);
 
     }
 
@@ -52,16 +60,10 @@ public class UserRecycler extends RecyclerView.Adapter<UserRecycler.UserViewHold
 
     }
 
-    public void setData(List<User> data) {
-        this.data = data;
-        notifyDataSetChanged();
-    }
-
-    public class UserViewHolder extends RecyclerView.ViewHolder{
+    public static class UserViewHolder extends RecyclerView.ViewHolder{
 
         ImageView imageView;
         TextView name, dob;
-        Button btnDelete;
 
         public UserViewHolder( @NotNull View itemView) {
             super(itemView);

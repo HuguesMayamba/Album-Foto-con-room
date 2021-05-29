@@ -6,8 +6,8 @@
     <color name="white_t">#88ffffff</color>
 
     <!--Material Theme Colors-->
-    <color name="color_primary">#f48fb1</color>
-    <color name="color_primary_variant">#bf5f82</color>
+    <color name="color_primary">#d1c4e9</color>
+    <color name="color_primary_variant">#9575cd</color>
     <color name="color_secondary">#424242</color>
     <color name="color_secondary_variant">#1b1b1b</color>
 
