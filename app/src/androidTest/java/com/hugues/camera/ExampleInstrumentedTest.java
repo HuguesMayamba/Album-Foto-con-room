@@ -1,4 +1,4 @@
-package com.hugues.taskfarmy;
+package com.hugues.camera;
 
 import android.content.Context;
 

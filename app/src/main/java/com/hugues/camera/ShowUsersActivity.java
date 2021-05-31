@@ -1,13 +1,12 @@
-package com.hugues.taskfarmy;
+package com.hugues.camera;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
-import android.widget.TextView;
 
-import com.hugues.taskfarmy.DataModel.UserDAO;
-import com.hugues.taskfarmy.DataModel.UserDatabase;
+import com.hugues.camera.DataModel.UserDAO;
+import com.hugues.camera.DataModel.UserDatabase;
 
 public class ShowUsersActivity extends AppCompatActivity {
     RecyclerView recyclerView;

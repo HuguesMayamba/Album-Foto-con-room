@@ -1,2 +1,2 @@
-rootProject.name = "TaskFarmy"
+rootProject.name = "Camera"
 include ':app'

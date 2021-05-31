@@ -1,4 +1,4 @@
-package com.hugues.taskfarmy;
+package com.hugues.camera;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.hugues.taskfarmy.DataModel.DataConverter;
-import com.hugues.taskfarmy.DataModel.User;
+import com.hugues.camera.DataModel.DataConverter;
+import com.hugues.camera.DataModel.User;
 import org.jetbrains.annotations.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;

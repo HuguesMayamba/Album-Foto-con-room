@@ -1,28 +1,21 @@
-package com.hugues.taskfarmy;
+package com.hugues.camera;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.hugues.taskfarmy.DataModel.DataConverter;
-import com.hugues.taskfarmy.DataModel.User;
-import com.hugues.taskfarmy.DataModel.UserDAO;
-import com.hugues.taskfarmy.DataModel.UserDatabase;
-
+import com.hugues.camera.DataModel.DataConverter;
+import com.hugues.camera.DataModel.User;
+import com.hugues.camera.DataModel.UserDAO;
+import com.hugues.camera.DataModel.UserDatabase;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -37,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     UserDAO userDAO;
     User user = new User();
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,31 +45,23 @@ public class MainActivity extends AppCompatActivity {
         dod = findViewById(R.id.userDod);
         userDAO = UserDatabase.getDBInstence(this).userDAO();
 
-        dod.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar cal = Calendar.getInstance();
-                mDate = cal.get(Calendar.DATE);
-                mMonth = cal.get(Calendar.MONTH);
-                mYear = cal.get(Calendar.YEAR);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
+        dod.setOnClickListener(v -> {
+            final Calendar cal = Calendar.getInstance();
+            mDate = cal.get(Calendar.DATE);
+            mMonth = cal.get(Calendar.MONTH);
+            mYear = cal.get(Calendar.YEAR);
+            DatePickerDialog datePickerDialog = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                datePickerDialog = new DatePickerDialog(
                         MainActivity.this, android.R.style.Widget_Material,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                dod.setText(dayOfMonth+"/"+month+"/"+year);
-                            }
-                        },mYear, mMonth, mDate);
-                datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()-1000);
-                datePickerDialog.show();
+                        (view, year, month, dayOfMonth) -> dod.setText(dayOfMonth+"/"+month+"/"+year),mYear, mMonth, mDate);
             }
+            assert datePickerDialog != null;
+            datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis()-1000);
+            datePickerDialog.show();
         });
 
-
-        Log.d("TAG1", "DATEDIALOG" );
-
     }
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -118,14 +104,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    @SuppressLint("SimpleDateFormat")
     public void saveUser(View view) {
 
         if(name.getText().toString().isEmpty() || uName.getText().toString().isEmpty()
         || pas.getText().toString().isEmpty() || bmpImage == null){
 
-
-            Toast.makeText(this,"User data is missing", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Falta campo por rellenar", Toast.LENGTH_LONG).show();
 
         }else {
 
@@ -142,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
             //Save particular user
             userDAO.insertUser(user);
 
-            Toast.makeText(this, "Insertion successful", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Datos introducidos correctamente", Toast.LENGTH_SHORT).show();
 
         }
 

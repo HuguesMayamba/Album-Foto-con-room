@@ -1,4 +1,4 @@
-package com.hugues.taskfarmy.DataModel;
+package com.hugues.camera.DataModel;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

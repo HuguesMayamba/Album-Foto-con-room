@@ -1,4 +1,4 @@
-package com.hugues.taskfarmy.DataModel;
+package com.hugues.camera.DataModel;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
