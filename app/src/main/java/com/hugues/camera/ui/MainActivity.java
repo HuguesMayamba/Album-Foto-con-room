@@ -1,7 +1,9 @@
-package com.hugues.camera;
+package com.hugues.camera.ui;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -16,6 +18,8 @@ import com.hugues.camera.DataModel.DataConverter;
 import com.hugues.camera.DataModel.User;
 import com.hugues.camera.DataModel.UserDAO;
 import com.hugues.camera.DataModel.UserDatabase;
+import com.hugues.camera.R;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -141,9 +145,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void deleteUsers(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("¿Quieres borrar todas las fotos?")
+                .setTitle("Ventana de alerta");
+        builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                userDAO.delete(userDAO.getAllUsers());
+                Toast.makeText(MainActivity.this, "Has borrado todas las fotos", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
 
-        userDAO.delete(userDAO.getAllUsers());
-
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
     }
 
-}

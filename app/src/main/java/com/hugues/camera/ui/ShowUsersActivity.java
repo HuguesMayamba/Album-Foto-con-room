@@ -1,4 +1,4 @@
-package com.hugues.camera;
+package com.hugues.camera.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.hugues.camera.DataModel.UserDAO;
 import com.hugues.camera.DataModel.UserDatabase;
+import com.hugues.camera.R;
 
 public class ShowUsersActivity extends AppCompatActivity {
     RecyclerView recyclerView;

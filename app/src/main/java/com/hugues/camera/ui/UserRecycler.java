@@ -1,4 +1,4 @@
-package com.hugues.camera;
+package com.hugues.camera.ui;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.hugues.camera.DataModel.DataConverter;
 import com.hugues.camera.DataModel.User;
+import com.hugues.camera.R;
+
 import org.jetbrains.annotations.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.Date;
